@@ -267,6 +267,6 @@ this.dssStorage().setData({username})
 }
 const DSS=new DynamicScreenSaver('.dss-container',{
   quoteAPIUrl:'https://quote-generator-21.herokuapp.com/random', 
-  imageAPIKey:'563492ad6f91700001000001c2d3843c3c9b449fa76a8beaf98ee930'
+  imageAPIKey:process.env.PEXELS_API_KEY
 ,imageAPIUrl:'https://api.pexels.com/v1/search'});
 
