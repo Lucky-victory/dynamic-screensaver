@@ -186,3 +186,11 @@ min-height: 100vh;
     background: #2E60A3;
 
 }
+.image-attribution{
+  color: inherit;
+  text-transform: capitalize;
+  position: absolute;
+  bottom: 1em;
+  right: 0.5em;
+  cursor: pointer;
+}

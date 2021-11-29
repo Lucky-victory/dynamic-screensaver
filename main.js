@@ -6,6 +6,7 @@ class DynamicScreenSaver {
     this.timeFormatToggle=this.container.querySelector('.time-format-toggle');
     this.timeFormatLabel=this.container.querySelector('.time-format-label');
     this.popUpContainer=this.container.querySelector('.popup');
+    this.imageAttribution=this.container.querySelector('.image-attribution');
     this.usernameForm=this.container.querySelector('.username-form');
     this.usernameErrorMessage=this.container.querySelector('.username-error');
     this.usernameInput=this.container.querySelector('.username-input');
@@ -139,8 +140,13 @@ this.editUsername.addEventListener('click',()=>{
          }
        }).then((res) => res.json()).then((data) => {
          this.BgImage = data;
-    const randomImage=Math.floor(Math.random() * perPage)
-    this.container.style.backgroundImage=`url(${this.BgImage.photos[randomImage].src.landscape})`;
+    const randomIndex=Math.floor(Math.random() * perPage);
+    const imageSrc=this.BgImage.photos[randomIndex].src.landscape;
+    this.container.style.backgroundImage=`url(${imageSrc})`;
+    const imagePhotographer=this.BgImage.photos[randomIndex].photographer;
+    const imagePhotographerUrl=this.BgImage.photos[randomIndex].photographer_url;
+this.imageAttribution.textContent='By '+imagePhotographer;
+this.imageAttribution.href=imagePhotographerUrl
        }).catch((err) => {
          if (err) {
            console.log(err);
@@ -179,6 +185,7 @@ this.editUsername.addEventListener('click',()=>{
               </form>
               
               </div>
+              <a class='image-attribution' ></a>
         `;
   }
   setTimeFormat(){
@@ -241,9 +248,11 @@ this.dssStorage().setData({username})
     let meridiem = this.hours > 12 ? 'pm' : 'am'
     meridiem = (!this.is24HourClock) ? meridiem : '';
     let hours=this.hours;
+   hours= hours == 0 ? '0'+hours : hours;
     if(!this.is24HourClock){
       
    hours = (this.hours % 12 == 0) ? 12 : this.hours % 12;
+   
     }
     
     let minutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;
