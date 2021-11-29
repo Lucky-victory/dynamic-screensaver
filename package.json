@@ -1,7 +1,7 @@
 {"version":"1.0.0",
   "name":"dynamic-screensaver",
   "main":"main.js",
-  "script":{
+  "scripts":{
     "build":"webpack main.js ./dist/bundled.js"
   },
   "devDependencies":{
