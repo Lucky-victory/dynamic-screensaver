@@ -5,6 +5,6 @@
     "build":"webpack"
   },
   "devDependencies":{
-    "webpack":"5.50.0"
+    "webpack":"^5.64.4"
   }
 }
