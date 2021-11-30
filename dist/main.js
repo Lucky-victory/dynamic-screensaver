@@ -114,7 +114,8 @@ this.editUsername.addEventListener('click',()=>{
   /**Fetches images from an API.
    * 
    * **/
-  fetchImage(searchValue='morning'){
+  async fetchImage(searchValue='morning'){
+    try{
     const perPage=25;
     const hours=this.currentDate && this.currentDate.getHours() || new Date().getHours();
     if (hours >=12 && hours <=16){ searchValue='afternoon';}
@@ -134,16 +135,15 @@ const reqBody={
 perPage,
 searchValue
 }
-     if (this.imageAPIUrl) {
-       fetch(this.imageAPIUrl, {
+     const response=await  fetch(this.imageAPIUrl, {
          method: 'post',
          headers:{
          'Content-Type':'application/json'  
            
          },
          body:JSON.stringify(reqBody)
-       }).then((res) => res.json()).then((data) => {
-         this.BgImage = data;
+       });
+       this.BgImage= await response.json();
     const randomIndex=Math.floor(Math.random() * perPage);
     const imageSrc=this.BgImage.photos[randomIndex].src.landscape;
     this.container.style.backgroundImage=`url(${imageSrc})`;
@@ -151,12 +151,13 @@ searchValue
     const imagePhotographerUrl=this.BgImage.photos[randomIndex].photographer_url;
 this.imageAttribution.textContent='By '+imagePhotographer;
 this.imageAttribution.href=imagePhotographerUrl
-       }).catch((err) => {
-         if (err) {
+    }
+      catch(err){
+        
            console.log(err);
-         }
-       });
-     }
+         
+       }
+     
   }
   /**Renders html to the container
    * 
