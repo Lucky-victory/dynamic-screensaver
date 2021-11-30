@@ -2,8 +2,8 @@ const axios=require('axios');
 const imageAPIKey=process.env.PEXELS_API_KEY;
 const imageAPIUrl='https://api.pexels.com/v1/search';
 exports.handler=async (event,context)=>{
-  const reqBody=JSON.parse(event.body);
   try{
+  const reqBody=JSON.parse(event.body);
   const searchValue=reqBody.searchValue;
   const perPage=reqBody.perPage;
   let response=null;

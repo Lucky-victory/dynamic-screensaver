@@ -19,7 +19,6 @@ class DynamicScreenSaver {
     this.options = options;
     this.quoteAPIUrl = this.options && this.options.quoteAPIUrl;
     this.imageAPIUrl = this.options && this.options.imageAPIUrl;
-    this.imageAPIKey = this.options && this.options.imageAPIKey;
     this.BgImage=null;
     this.quote = null;
     this.is24HourClock = false;
