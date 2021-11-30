@@ -1,8 +1,8 @@
 const axios=require('axios');
-const imageAPIKey=process.env.PEXELS_API_KEY;
-const imageAPIUrl='https://api.pexels.com/v1/search';
 exports.handler=async (event,context)=>{
   try{
+const imageAPIUrl='https://api.pexels.com/v1/search';
+const imageAPIKey=process.env.PEXELS_API_KEY;
   const reqBody=JSON.parse(event.body);
   const searchValue=reqBody.searchValue;
   const perPage=reqBody.perPage;
@@ -20,7 +20,11 @@ exports.handler=async (event,context)=>{
   }
   }
    catch(err){
-     console.log(err)
+     console.log(err);
+     return {
+       statusCode: 500,
+       body: JSON.stringify({'message':'SERVER ERROR',data:err})
+     }
    }
    
 }
