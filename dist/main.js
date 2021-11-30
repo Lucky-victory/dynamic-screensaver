@@ -131,13 +131,18 @@ this.editUsername.addEventListener('click',()=>{
   else {
     searchValue='morning';
 }
-
-     if (this.imageAPIUrl && this.imageAPIKey) {
-       fetch(`${this.imageAPIUrl}?query=${searchValue}&size=medium&per_page=${perPage}`, {
-         method: 'get',
+const reqBody={
+perPage,
+searchValue
+}
+     if (this.imageAPIUrl) {
+       fetch(this.imageAPIUrl, {
+         method: 'post',
          headers:{
-         "Authorization":this.imageAPIKey
-         }
+         'Content-Type':'application/json'  
+           
+         },
+         body:JSON.stringify(reqBody)
        }).then((res) => res.json()).then((data) => {
          this.BgImage = data;
     const randomIndex=Math.floor(Math.random() * perPage);
@@ -275,7 +280,6 @@ this.dssStorage().setData({username})
   }
 }
 const DSS=new DynamicScreenSaver('.dss-container',{
-  quoteAPIUrl:'https://quote-generator-21.herokuapp.com/random', 
-  imageAPIKey:process.env.PEXELS_API_KEY
-,imageAPIUrl:'https://api.pexels.com/v1/search'});
+  quoteAPIUrl:'https://quote-generator-21.herokuapp.com/random'
+  ,imageAPIUrl:'/.netlify/functions/fetch_image'})
 
