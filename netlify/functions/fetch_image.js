@@ -6,19 +6,17 @@ exports.handler=async (event,context)=>{
   const reqBody=JSON.parse(event.body);
   const searchValue=reqBody.searchValue;
   const perPage=reqBody.perPage;
-  let response=null;
   
-  if (imageAPIUrl && imageAPIKey) {
-   response=await axios(`${imageAPIUrl}?query=${searchValue}&size=medium&per_page=${perPage}`, {
+  let response=await axios(`${imageAPIUrl}?query=${searchValue}&size=medium&per_page=${perPage}`, {
           method: 'get',
           headers: {
             "Authorization": `${imageAPIKey}`
           }
-   })
-  }
+   });
+  let data=await response.data;
   return {
     statusCode:200,
-    body:JSON.stringify(response)
+    body:JSON.stringify({data})
   }
   }
    catch(err){
