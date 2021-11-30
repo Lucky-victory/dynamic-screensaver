@@ -19,7 +19,7 @@ class DynamicScreenSaver {
     this.options = options;
     this.quoteAPIUrl = this.options && this.options.quoteAPIUrl;
     this.imageAPIUrl = this.options && this.options.imageAPIUrl;
-    this.BgImage=null;
+    
     this.quote = null;
     this.is24HourClock = false;
     this.currentDate=null;
@@ -143,12 +143,13 @@ searchValue
          },
          body:JSON.stringify(reqBody)
        });
-       this.BgImage= await response.json();
+       let bgImage= await response.json();
+       bgImage=bgImage.data;
     const randomIndex=Math.floor(Math.random() * perPage);
-    const imageSrc=this.BgImage.photos[randomIndex].src.landscape;
+    const imageSrc=bgImage.photos[randomIndex].src.landscape;
     this.container.style.backgroundImage=`url(${imageSrc})`;
-    const imagePhotographer=this.BgImage.photos[randomIndex].photographer;
-    const imagePhotographerUrl=this.BgImage.photos[randomIndex].photographer_url;
+    const imagePhotographer=bgImage.photos[randomIndex].photographer;
+    const imagePhotographerUrl=bgImage.photos[randomIndex].photographer_url;
 this.imageAttribution.textContent='By '+imagePhotographer;
 this.imageAttribution.href=imagePhotographerUrl
     }
