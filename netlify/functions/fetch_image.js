@@ -16,7 +16,7 @@ const imageAPIKey=process.env.PEXELS_API_KEY;
   let data=await response.data;
   return {
     statusCode:200,
-    body:JSON.stringify({data})
+    body:JSON.stringify(data)
   }
   }
    catch(err){

@@ -144,7 +144,7 @@ searchValue
          body:JSON.stringify(reqBody)
        });
        let bgImage= await response.json();
-       bgImage=bgImage.data;
+      
     const randomIndex=Math.floor(Math.random() * perPage);
     const imageSrc=bgImage.photos[randomIndex].src.landscape;
     this.container.style.backgroundImage=`url(${imageSrc})`;
